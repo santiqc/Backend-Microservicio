@@ -4,6 +4,7 @@ import com.backend.clienteinfoservice.dto.ClienteRequestDTO;
 import com.backend.clienteinfoservice.dto.ClienteResponseDTO;
 import com.backend.clienteinfoservice.dto.ResponseDTO;
 import com.backend.clienteinfoservice.entity.Cliente;
+import com.backend.clienteinfoservice.exception.ClienteException;
 import com.backend.clienteinfoservice.repository.ClienteRepository;
 import com.backend.clienteinfoservice.repository.IClienteRepository;
 import org.slf4j.Logger;
@@ -21,7 +22,7 @@ public class ClienteService implements IClienteService {
     private final Logger LOGGER = LoggerFactory.getLogger(ClienteRepository.class);
 
     @Override
-    public ResponseDTO consultarCliente(ClienteRequestDTO requestDTO) throws Exception {
+    public ResponseDTO consultarCliente(ClienteRequestDTO requestDTO) {
         LOGGER.info("Consultando información del cliente. Parámetros recibidos: {}", requestDTO);
         try {
 
@@ -50,7 +51,7 @@ public class ClienteService implements IClienteService {
             return responseDTO;
         } catch (Exception e) {
             LOGGER.error("Error al consultar cliente: {}", e.getMessage());
-            throw new Exception("Error interno del servidor: " + e.getMessage());
+            throw new ClienteException("Error al consultar cliente por documento: " + e.getMessage());
         }
     }
 

@@ -2,6 +2,7 @@ package com.backend.clienteinfoservice.controller;
 
 import com.backend.clienteinfoservice.dto.ClienteRequestDTO;
 import com.backend.clienteinfoservice.dto.ResponseDTO;
+import com.backend.clienteinfoservice.exception.ClienteException;
 import com.backend.clienteinfoservice.repository.ClienteRepository;
 import com.backend.clienteinfoservice.service.IClienteService;
 import org.slf4j.Logger;
@@ -20,7 +21,7 @@ public class ClienteController {
     private final Logger LOGGER = LoggerFactory.getLogger(ClienteRepository.class);
 
     @PostMapping("/cliente")
-    public ResponseEntity<ResponseDTO> consultarCliente(@RequestBody ClienteRequestDTO requestDTO) throws Exception {
+    public ResponseEntity<ResponseDTO> consultarCliente(@RequestBody ClienteRequestDTO requestDTO) throws ClienteException {
         ResponseDTO responseDTO = clienteService.consultarCliente(requestDTO);
         HttpStatus status = HttpStatus.valueOf(responseDTO.getCodigoRespuesta());
         LOGGER.info("Respuesta enviada al cliente: {}", responseDTO);
