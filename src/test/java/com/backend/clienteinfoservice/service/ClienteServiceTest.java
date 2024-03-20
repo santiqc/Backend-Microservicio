@@ -5,6 +5,7 @@ import com.backend.clienteinfoservice.dto.ResponseDTO;
 import com.backend.clienteinfoservice.entity.Cliente;
 import com.backend.clienteinfoservice.exception.ClienteException;
 import com.backend.clienteinfoservice.repository.IClienteRepository;
+import com.backend.clienteinfoservice.utils.Mensaje;
 import com.backend.clienteinfoservice.utils.TipoDocumentoEnum;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -66,12 +67,13 @@ public class ClienteServiceTest {
         requestDTO.setTipoDocumento(TipoDocumentoEnum.C);
         requestDTO.setNumeroDocumento("12334432");
 
+        String mensaje = String.format(Mensaje.USUARIO_NO_ENCONTRADO, Mensaje.CEDULA_CIUDADANIA, requestDTO.getNumeroDocumento());
         when(clienteRepository.consultarPorDocumento(requestDTO)).thenReturn(null);
 
         ResponseDTO result = clienteService.consultarCliente(requestDTO);
         assertNotNull(result);
         assertEquals(result.getCodigoRespuesta(), HttpStatus.NOT_FOUND.value());
-        assertEquals(result.getMensaje(), "Datos no encontrados");
+        assertEquals(result.getMensaje(), mensaje);
     }
 
     @Test
