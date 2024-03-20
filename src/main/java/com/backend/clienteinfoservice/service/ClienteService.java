@@ -51,7 +51,7 @@ public class ClienteService implements IClienteService {
 
             responseDTO.setData(clienteResponseDTO);
             responseDTO.setCodigoRespuesta(HttpStatus.OK.value());
-            responseDTO.setMensaje(Mensaje.DATOS_NO_ENCONTRADOS);
+            responseDTO.setMensaje(Mensaje.DATOS_ENCONTRADOS);
             return responseDTO;
         } catch (Exception e) {
             LOGGER.error("Error al consultar cliente: {}", e.getMessage());
