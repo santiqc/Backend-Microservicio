@@ -1,6 +1,6 @@
 package com.backend.clienteinfoservice.utils;
 
-public enum TipoEnum {
+public enum TipoDocumentoEnum {
     C,
     P
 }

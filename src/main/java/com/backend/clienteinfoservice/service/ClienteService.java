@@ -7,6 +7,8 @@ import com.backend.clienteinfoservice.entity.Cliente;
 import com.backend.clienteinfoservice.exception.ClienteException;
 import com.backend.clienteinfoservice.repository.ClienteRepository;
 import com.backend.clienteinfoservice.repository.IClienteRepository;
+import com.backend.clienteinfoservice.utils.Mensaje;
+import com.backend.clienteinfoservice.utils.TipoDocumentoEnum;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +32,7 @@ public class ClienteService implements IClienteService {
 
             if (requestDTO.getNumeroDocumento() == null || requestDTO.getNumeroDocumento().isBlank()) {
                 responseDTO.setCodigoRespuesta(HttpStatus.BAD_REQUEST.value());
-                responseDTO.setMensaje("Solicitud Incorrecta");
+                responseDTO.setMensaje(Mensaje.SOLICITUD_INCORRECTA);
                 return responseDTO;
             }
 
@@ -38,7 +40,9 @@ public class ClienteService implements IClienteService {
             LOGGER.info("Cliente encontrado: {}", cliente);
             if (cliente == null) {
                 responseDTO.setCodigoRespuesta(HttpStatus.NOT_FOUND.value());
-                responseDTO.setMensaje("Datos no encontrados");
+                String tipoDocumento = requestDTO.getTipoDocumento().equals(TipoDocumentoEnum.P) ? Mensaje.PASAPORTE : Mensaje.CEDULA_CIUDADANIA;
+                String mensaje = String.format(Mensaje.USUARIO_NO_ENCONTRADO, tipoDocumento, requestDTO.getNumeroDocumento());
+                responseDTO.setMensaje(mensaje);
                 return responseDTO;
             }
 
@@ -47,11 +51,11 @@ public class ClienteService implements IClienteService {
 
             responseDTO.setData(clienteResponseDTO);
             responseDTO.setCodigoRespuesta(HttpStatus.OK.value());
-            responseDTO.setMensaje("Datos encontrados");
+            responseDTO.setMensaje(Mensaje.DATOS_NO_ENCONTRADOS);
             return responseDTO;
         } catch (Exception e) {
             LOGGER.error("Error al consultar cliente: {}", e.getMessage());
-            throw new ClienteException("Error al consultar cliente por documento: " + e.getMessage());
+            throw new ClienteException(Mensaje.ERROR_CONSULTAR_CLIENTE + e.getMessage());
         }
     }
 

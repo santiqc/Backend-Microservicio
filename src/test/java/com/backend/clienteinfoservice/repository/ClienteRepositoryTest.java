@@ -3,7 +3,7 @@ package com.backend.clienteinfoservice.repository;
 
 import com.backend.clienteinfoservice.dto.ClienteRequestDTO;
 import com.backend.clienteinfoservice.entity.Cliente;
-import com.backend.clienteinfoservice.utils.TipoEnum;
+import com.backend.clienteinfoservice.utils.TipoDocumentoEnum;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -24,7 +24,7 @@ public class ClienteRepositoryTest {
     @Test
     void consultarClientePorDocumentoTest() {
         ClienteRequestDTO requestDTO = new ClienteRequestDTO();
-        requestDTO.setTipoDocumento(TipoEnum.C);
+        requestDTO.setTipoDocumento(TipoDocumentoEnum.C);
         requestDTO.setNumeroDocumento("10121314");
         Cliente result = clienteRepository.consultarPorDocumento(requestDTO);
         assertNotNull(result);
@@ -34,7 +34,7 @@ public class ClienteRepositoryTest {
     @Test
     void consultarClientePorDocumentoNullTest() {
         ClienteRequestDTO requestDTO = new ClienteRequestDTO();
-        requestDTO.setTipoDocumento(TipoEnum.P);
+        requestDTO.setTipoDocumento(TipoDocumentoEnum.P);
         requestDTO.setNumeroDocumento("10121314");
 
         Cliente result = clienteRepository.consultarPorDocumento(requestDTO);

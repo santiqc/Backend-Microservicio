@@ -1,10 +1,10 @@
 package com.backend.clienteinfoservice.entity;
 
-import com.backend.clienteinfoservice.utils.TipoEnum;
+import com.backend.clienteinfoservice.utils.TipoDocumentoEnum;
 
 public class Cliente {
 
-    private TipoEnum tipoDocumento;
+    private TipoDocumentoEnum tipoDocumento;
     private String numeroDocumento;
     private String primerNombre;
     private String segundoNombre;
@@ -17,7 +17,7 @@ public class Cliente {
     public Cliente() {
     }
 
-    public Cliente(TipoEnum tipoDocumento, String numeroDocumento, String primerNombre, String segundoNombre, String primerApellido, String segundoApellido, String telefono, String direccion, String ciudadResidencia) {
+    public Cliente(TipoDocumentoEnum tipoDocumento, String numeroDocumento, String primerNombre, String segundoNombre, String primerApellido, String segundoApellido, String telefono, String direccion, String ciudadResidencia) {
         this.tipoDocumento = tipoDocumento;
         this.numeroDocumento = numeroDocumento;
         this.primerNombre = primerNombre;
@@ -29,11 +29,11 @@ public class Cliente {
         this.ciudadResidencia = ciudadResidencia;
     }
 
-    public TipoEnum getTipoDocumento() {
+    public TipoDocumentoEnum getTipoDocumento() {
         return tipoDocumento;
     }
 
-    public void setTipoDocumento(TipoEnum tipoDocumento) {
+    public void setTipoDocumento(TipoDocumentoEnum tipoDocumento) {
         this.tipoDocumento = tipoDocumento;
     }
 

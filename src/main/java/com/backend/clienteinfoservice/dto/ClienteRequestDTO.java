@@ -1,9 +1,9 @@
 package com.backend.clienteinfoservice.dto;
 
-import com.backend.clienteinfoservice.utils.TipoEnum;
+import com.backend.clienteinfoservice.utils.TipoDocumentoEnum;
 
 public class ClienteRequestDTO {
-    private TipoEnum tipoDocumento;
+    private TipoDocumentoEnum tipoDocumento;
     private String numeroDocumento;
 
 
@@ -11,16 +11,16 @@ public class ClienteRequestDTO {
 
     }
 
-    public ClienteRequestDTO(TipoEnum tipoDocumento, String numeroDocumento) {
+    public ClienteRequestDTO(TipoDocumentoEnum tipoDocumento, String numeroDocumento) {
         this.tipoDocumento = tipoDocumento;
         this.numeroDocumento = numeroDocumento;
     }
 
-    public TipoEnum getTipoDocumento() {
+    public TipoDocumentoEnum getTipoDocumento() {
         return tipoDocumento;
     }
 
-    public void setTipoDocumento(TipoEnum tipoDocumento) {
+    public void setTipoDocumento(TipoDocumentoEnum tipoDocumento) {
         this.tipoDocumento = tipoDocumento;
     }
 

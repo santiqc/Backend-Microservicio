@@ -5,7 +5,7 @@ import com.backend.clienteinfoservice.dto.ResponseDTO;
 import com.backend.clienteinfoservice.entity.Cliente;
 import com.backend.clienteinfoservice.exception.ClienteException;
 import com.backend.clienteinfoservice.service.IClienteService;
-import com.backend.clienteinfoservice.utils.TipoEnum;
+import com.backend.clienteinfoservice.utils.TipoDocumentoEnum;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -34,9 +34,9 @@ public class ClienteControllerTest {
     @Test
     void consultarClientePorDocumentoTest() throws ClienteException {
         ClienteRequestDTO requestDTO = new ClienteRequestDTO();
-        requestDTO.setTipoDocumento(TipoEnum.C);
+        requestDTO.setTipoDocumento(TipoDocumentoEnum.C);
         requestDTO.setNumeroDocumento("10121314");
-        Cliente cliente = new Cliente(TipoEnum.C, "10121314", "Juan", "Carlos", "Pérez", "Gómez", "123456789", "Calle 123", "Ciudad A");
+        Cliente cliente = new Cliente(TipoDocumentoEnum.C, "10121314", "Juan", "Carlos", "Pérez", "Gómez", "123456789", "Calle 123", "Ciudad A");
         ResponseDTO responseDTO = new ResponseDTO("Datos Encontrados", HttpStatus.OK.value(), cliente);
 
         when(clienteService.consultarCliente(requestDTO)).thenReturn(responseDTO);

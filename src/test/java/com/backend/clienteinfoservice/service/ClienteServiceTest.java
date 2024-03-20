@@ -5,7 +5,7 @@ import com.backend.clienteinfoservice.dto.ResponseDTO;
 import com.backend.clienteinfoservice.entity.Cliente;
 import com.backend.clienteinfoservice.exception.ClienteException;
 import com.backend.clienteinfoservice.repository.IClienteRepository;
-import com.backend.clienteinfoservice.utils.TipoEnum;
+import com.backend.clienteinfoservice.utils.TipoDocumentoEnum;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -32,10 +32,10 @@ public class ClienteServiceTest {
     @Test
     void consultarClientePorDocumentoTest() throws ClienteException {
         ClienteRequestDTO requestDTO = new ClienteRequestDTO();
-        requestDTO.setTipoDocumento(TipoEnum.C);
+        requestDTO.setTipoDocumento(TipoDocumentoEnum.C);
         requestDTO.setNumeroDocumento("10121314");
 
-        Cliente cliente = new Cliente(TipoEnum.C, "10121314", "Juan", "Carlos", "Pérez", "Gómez", "123456789", "Calle 123", "Ciudad A");
+        Cliente cliente = new Cliente(TipoDocumentoEnum.C, "10121314", "Juan", "Carlos", "Pérez", "Gómez", "123456789", "Calle 123", "Ciudad A");
         when(clienteRepository.consultarPorDocumento(requestDTO)).thenReturn(cliente);
 
         ResponseDTO result = clienteService.consultarCliente(requestDTO);
@@ -47,10 +47,10 @@ public class ClienteServiceTest {
     @Test
     void consultarClientePorDocumentoRequestNullTest() throws ClienteException {
         ClienteRequestDTO requestDTO = new ClienteRequestDTO();
-        requestDTO.setTipoDocumento(TipoEnum.C);
+        requestDTO.setTipoDocumento(TipoDocumentoEnum.C);
         requestDTO.setNumeroDocumento(null);
 
-        Cliente cliente = new Cliente(TipoEnum.C, "10121314", "Juan", "Carlos", "Pérez", "Gómez", "123456789", "Calle 123", "Ciudad A");
+        Cliente cliente = new Cliente(TipoDocumentoEnum.C, "10121314", "Juan", "Carlos", "Pérez", "Gómez", "123456789", "Calle 123", "Ciudad A");
         when(clienteRepository.consultarPorDocumento(requestDTO)).thenReturn(cliente);
 
         ResponseDTO result = clienteService.consultarCliente(requestDTO);
@@ -63,7 +63,7 @@ public class ClienteServiceTest {
     @Test
     void consultarClientePorDocumentoClienteNullTest() throws ClienteException {
         ClienteRequestDTO requestDTO = new ClienteRequestDTO();
-        requestDTO.setTipoDocumento(TipoEnum.C);
+        requestDTO.setTipoDocumento(TipoDocumentoEnum.C);
         requestDTO.setNumeroDocumento("12334432");
 
         when(clienteRepository.consultarPorDocumento(requestDTO)).thenReturn(null);
@@ -77,7 +77,7 @@ public class ClienteServiceTest {
     @Test
     void consultarClientePorDocumentoTestThrowException() throws ClienteException {
         ClienteRequestDTO requestDTO = new ClienteRequestDTO();
-        requestDTO.setTipoDocumento(TipoEnum.C);
+        requestDTO.setTipoDocumento(TipoDocumentoEnum.C);
         requestDTO.setNumeroDocumento("12334432");
 
         when(clienteRepository.consultarPorDocumento(any())).thenThrow(new ClienteException("Simulated Exception"));
