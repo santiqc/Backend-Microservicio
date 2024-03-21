@@ -19,7 +19,7 @@ public class ClienteController {
     @Autowired
     private IClienteService clienteService;
 
-    private final Logger LOGGER = LoggerFactory.getLogger(ClienteRepository.class);
+    private final Logger LOGGER = LoggerFactory.getLogger(ClienteController.class);
 
     @PostMapping("/cliente")
     public ResponseEntity<ResponseDTO> consultarCliente(@RequestBody ClienteRequestDTO requestDTO) throws ClienteException {
