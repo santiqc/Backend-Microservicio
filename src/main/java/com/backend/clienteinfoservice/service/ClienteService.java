@@ -21,7 +21,7 @@ public class ClienteService implements IClienteService {
     @Autowired
     private IClienteRepository clienteRepository;
 
-    private final Logger LOGGER = LoggerFactory.getLogger(ClienteRepository.class);
+    private final Logger LOGGER = LoggerFactory.getLogger(ClienteService.class);
 
     @Override
     public ResponseDTO consultarCliente(ClienteRequestDTO requestDTO) {
