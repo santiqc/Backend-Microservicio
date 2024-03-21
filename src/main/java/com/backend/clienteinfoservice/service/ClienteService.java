@@ -5,7 +5,6 @@ import com.backend.clienteinfoservice.dto.ClienteResponseDTO;
 import com.backend.clienteinfoservice.dto.ResponseDTO;
 import com.backend.clienteinfoservice.entity.Cliente;
 import com.backend.clienteinfoservice.exception.ClienteException;
-import com.backend.clienteinfoservice.repository.ClienteRepository;
 import com.backend.clienteinfoservice.repository.IClienteRepository;
 import com.backend.clienteinfoservice.utils.Mensaje;
 import com.backend.clienteinfoservice.utils.TipoDocumentoEnum;
@@ -21,7 +20,7 @@ public class ClienteService implements IClienteService {
     @Autowired
     private IClienteRepository clienteRepository;
 
-    private final Logger LOGGER = LoggerFactory.getLogger(ClienteRepository.class);
+    private final Logger LOGGER = LoggerFactory.getLogger(ClienteService.class);
 
     @Override
     public ResponseDTO consultarCliente(ClienteRequestDTO requestDTO) {
@@ -36,7 +35,7 @@ public class ClienteService implements IClienteService {
                 return responseDTO;
             }
 
-            Cliente cliente = clienteRepository.consultarPorDocumento(requestDTO);
+            Cliente cliente = clienteRepository.findByTipoDocumentoAndNumeroDocumento(requestDTO.getTipoDocumento(), requestDTO.getNumeroDocumento());
             LOGGER.info("Cliente encontrado: {}", cliente);
             if (cliente == null) {
                 responseDTO.setCodigoRespuesta(HttpStatus.NOT_FOUND.value());

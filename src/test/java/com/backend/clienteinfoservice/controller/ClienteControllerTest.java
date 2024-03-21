@@ -36,7 +36,7 @@ public class ClienteControllerTest {
         ClienteRequestDTO requestDTO = new ClienteRequestDTO();
         requestDTO.setTipoDocumento(TipoDocumentoEnum.C);
         requestDTO.setNumeroDocumento("10121314");
-        Cliente cliente = new Cliente(TipoDocumentoEnum.C, "10121314", "Juan", "Carlos", "Pérez", "Gómez", "123456789", "Calle 123", "Ciudad A");
+        Cliente cliente = new Cliente(1L,TipoDocumentoEnum.C, "10121314", "Juan", "Carlos", "Pérez", "Gómez", "123456789", "Calle 123", "Ciudad A");
         ResponseDTO responseDTO = new ResponseDTO("Datos Encontrados", HttpStatus.OK.value(), cliente);
 
         when(clienteService.consultarCliente(requestDTO)).thenReturn(responseDTO);

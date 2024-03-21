@@ -36,13 +36,13 @@ public class ClienteServiceTest {
         requestDTO.setTipoDocumento(TipoDocumentoEnum.C);
         requestDTO.setNumeroDocumento("10121314");
 
-        Cliente cliente = new Cliente(TipoDocumentoEnum.C, "10121314", "Juan", "Carlos", "Pérez", "Gómez", "123456789", "Calle 123", "Ciudad A");
-        when(clienteRepository.consultarPorDocumento(requestDTO)).thenReturn(cliente);
+        Cliente cliente = new Cliente(1L, TipoDocumentoEnum.C, "10121314", "Juan", "Carlos", "Pérez", "Gómez", "123456789", "Calle 123", "Ciudad A");
+        when(clienteRepository.findByTipoDocumentoAndNumeroDocumento(requestDTO.getTipoDocumento(), requestDTO.getNumeroDocumento())).thenReturn(cliente);
 
         ResponseDTO result = clienteService.consultarCliente(requestDTO);
         assertNotNull(result);
         assertEquals(result.getCodigoRespuesta(), HttpStatus.OK.value());
-        verify(clienteRepository, times(1)).consultarPorDocumento(requestDTO);
+        verify(clienteRepository, times(1)).findByTipoDocumentoAndNumeroDocumento(requestDTO.getTipoDocumento(), requestDTO.getNumeroDocumento());
     }
 
     @Test
@@ -51,8 +51,8 @@ public class ClienteServiceTest {
         requestDTO.setTipoDocumento(TipoDocumentoEnum.C);
         requestDTO.setNumeroDocumento(null);
 
-        Cliente cliente = new Cliente(TipoDocumentoEnum.C, "10121314", "Juan", "Carlos", "Pérez", "Gómez", "123456789", "Calle 123", "Ciudad A");
-        when(clienteRepository.consultarPorDocumento(requestDTO)).thenReturn(cliente);
+        Cliente cliente = new Cliente(1L,TipoDocumentoEnum.C, "10121314", "Juan", "Carlos", "Pérez", "Gómez", "123456789", "Calle 123", "Ciudad A");
+        when(clienteRepository.findByTipoDocumentoAndNumeroDocumento(requestDTO.getTipoDocumento(), requestDTO.getNumeroDocumento())).thenReturn(cliente);
 
         ResponseDTO result = clienteService.consultarCliente(requestDTO);
         assertNotNull(result);
@@ -68,7 +68,7 @@ public class ClienteServiceTest {
         requestDTO.setNumeroDocumento("12334432");
 
         String mensaje = String.format(Mensaje.USUARIO_NO_ENCONTRADO, Mensaje.CEDULA_CIUDADANIA, requestDTO.getNumeroDocumento());
-        when(clienteRepository.consultarPorDocumento(requestDTO)).thenReturn(null);
+        when(clienteRepository.findByTipoDocumentoAndNumeroDocumento(requestDTO.getTipoDocumento(), requestDTO.getNumeroDocumento())).thenReturn(null);
 
         ResponseDTO result = clienteService.consultarCliente(requestDTO);
         assertNotNull(result);
@@ -82,7 +82,7 @@ public class ClienteServiceTest {
         requestDTO.setTipoDocumento(TipoDocumentoEnum.C);
         requestDTO.setNumeroDocumento("12334432");
 
-        when(clienteRepository.consultarPorDocumento(any())).thenThrow(new ClienteException("Simulated Exception"));
+        when(clienteRepository.findByTipoDocumentoAndNumeroDocumento(any(), any())).thenThrow(new ClienteException("Simulated Exception"));
 
         ClienteException exception = assertThrows(ClienteException.class, () -> clienteService.consultarCliente(requestDTO));
         assertEquals("Error al consultar cliente por documento: Simulated Exception", exception.getMessage());

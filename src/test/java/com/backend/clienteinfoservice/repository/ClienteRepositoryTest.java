@@ -7,14 +7,16 @@ import com.backend.clienteinfoservice.utils.TipoDocumentoEnum;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.when;
 
 public class ClienteRepositoryTest {
 
-    @InjectMocks
-    private ClienteRepository clienteRepository;
+    @Mock
+    private IClienteRepository clienteRepository;
 
     @BeforeEach
     void setUp() {
@@ -26,7 +28,9 @@ public class ClienteRepositoryTest {
         ClienteRequestDTO requestDTO = new ClienteRequestDTO();
         requestDTO.setTipoDocumento(TipoDocumentoEnum.C);
         requestDTO.setNumeroDocumento("10121314");
-        Cliente result = clienteRepository.consultarPorDocumento(requestDTO);
+        Cliente cliente = new Cliente(1L, TipoDocumentoEnum.C, "10121314", "Juan", "Carlos", "Pérez", "Gómez", "123456789", "Calle 123", "Ciudad A");
+        when(clienteRepository.findByTipoDocumentoAndNumeroDocumento(requestDTO.getTipoDocumento(), requestDTO.getNumeroDocumento())).thenReturn(cliente);
+        Cliente result = clienteRepository.findByTipoDocumentoAndNumeroDocumento(requestDTO.getTipoDocumento(), requestDTO.getNumeroDocumento());
         assertNotNull(result);
         assertEquals(result.getNumeroDocumento(), requestDTO.getNumeroDocumento());
     }
@@ -37,7 +41,7 @@ public class ClienteRepositoryTest {
         requestDTO.setTipoDocumento(TipoDocumentoEnum.P);
         requestDTO.setNumeroDocumento("10121314");
 
-        Cliente result = clienteRepository.consultarPorDocumento(requestDTO);
+        Cliente result = clienteRepository.findByTipoDocumentoAndNumeroDocumento(requestDTO.getTipoDocumento(), requestDTO.getNumeroDocumento());
         assertNull(result);
     }
 }

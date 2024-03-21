@@ -1,10 +1,18 @@
 package com.backend.clienteinfoservice.entity;
 
 import com.backend.clienteinfoservice.utils.TipoDocumentoEnum;
+import jakarta.persistence.*;
 
+@Entity
+@Table(name = "tbl_clientes")
 public class Cliente {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
+    @Enumerated(EnumType.STRING)
     private TipoDocumentoEnum tipoDocumento;
+
     private String numeroDocumento;
     private String primerNombre;
     private String segundoNombre;
@@ -17,7 +25,8 @@ public class Cliente {
     public Cliente() {
     }
 
-    public Cliente(TipoDocumentoEnum tipoDocumento, String numeroDocumento, String primerNombre, String segundoNombre, String primerApellido, String segundoApellido, String telefono, String direccion, String ciudadResidencia) {
+    public Cliente(Long id, TipoDocumentoEnum tipoDocumento, String numeroDocumento, String primerNombre, String segundoNombre, String primerApellido, String segundoApellido, String telefono, String direccion, String ciudadResidencia) {
+        this.id = id;
         this.tipoDocumento = tipoDocumento;
         this.numeroDocumento = numeroDocumento;
         this.primerNombre = primerNombre;
@@ -27,6 +36,14 @@ public class Cliente {
         this.telefono = telefono;
         this.direccion = direccion;
         this.ciudadResidencia = ciudadResidencia;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public TipoDocumentoEnum getTipoDocumento() {
@@ -99,20 +116,5 @@ public class Cliente {
 
     public void setCiudadResidencia(String ciudadResidencia) {
         this.ciudadResidencia = ciudadResidencia;
-    }
-
-    @Override
-    public String toString() {
-        return "Cliente{" +
-                "tipoDocumento=" + tipoDocumento +
-                ", numeroDocumento='" + numeroDocumento + '\'' +
-                ", primerNombre='" + primerNombre + '\'' +
-                ", segundoNombre='" + segundoNombre + '\'' +
-                ", primerApellido='" + primerApellido + '\'' +
-                ", segundoApellido='" + segundoApellido + '\'' +
-                ", telefono='" + telefono + '\'' +
-                ", direccion='" + direccion + '\'' +
-                ", ciudadResidencia='" + ciudadResidencia + '\'' +
-                '}';
     }
 }

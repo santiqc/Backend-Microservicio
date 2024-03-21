@@ -3,7 +3,6 @@ package com.backend.clienteinfoservice.controller;
 import com.backend.clienteinfoservice.dto.ClienteRequestDTO;
 import com.backend.clienteinfoservice.dto.ResponseDTO;
 import com.backend.clienteinfoservice.exception.ClienteException;
-import com.backend.clienteinfoservice.repository.ClienteRepository;
 import com.backend.clienteinfoservice.service.IClienteService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +18,7 @@ public class ClienteController {
     @Autowired
     private IClienteService clienteService;
 
-    private final Logger LOGGER = LoggerFactory.getLogger(ClienteRepository.class);
+    private final Logger LOGGER = LoggerFactory.getLogger(ClienteController.class);
 
     @PostMapping("/cliente")
     public ResponseEntity<ResponseDTO> consultarCliente(@RequestBody ClienteRequestDTO requestDTO) throws ClienteException {
